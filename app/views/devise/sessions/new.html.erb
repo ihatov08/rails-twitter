@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <center><h2>ログインする</h2></center>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-4 control-label"><%= f.label :email, "メールアドレス" %></label>
+    <div class="col-sm-8">
+      <%= f.email_field :email, autofocus: true, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-4 control-label"><%= f.label :password, "パスワード" %></label>
+    <div class="col-sm-8">
+      <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+    </div>
+  </div>
+
+  <% if @user.errors[:mail].blank? %>
+  <span class="text-danger">メールアドレスもしくはパスワードが違います</span>
+
+<% else %>
+  <span class="text-danger">メールアドレスもしくはパスワードが違います</span>
+
+<% end %>
+<%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
+<%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
+<%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
+
+
+
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-8">
+      <%= f.submit "ログイン", class: 'btn btn-default' %>
+    </div>
+  </div>
+    <% end %>
+</form>
+
+</div>
+</div>
