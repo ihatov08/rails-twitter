@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+100.times do |index|
+  Tweet.create(
+    user_id: rand(3) + 1,
+    content: "#{index}番目のツイートです",
+    )
+end

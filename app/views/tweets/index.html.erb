@@ -1,12 +1,29 @@
+<%= form_for(@tweet) do |f| %>
+
+
 <div class="form-group">
-<label for="ask1"></label>
- <textarea rows="5" class="form-control" id="ask1" placeholder="（本文は140字以内で投稿）" ></textarea>
+<%= f.text_area :content %>
+<%= f.text_field :user_id, value: current_user.id %>
+ <textarea rows="5" class="form-control" placeholder="（本文は140字以内で投稿）" ></textarea>
  </div>
- <div class="text-left"><span class="text-danger">本文は２文字以上１４０字以内で入力して下さい</span>
+
+ <div class="text-left"><span class="text-danger">
+   <% if @tweet.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+       <% @customer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+   <% end %>
+ </span>
+
  <div class="text-right">
-<button class="btn btn-primary">投稿</button>
+ <%= f.submit "投稿", class: "btn btn-primary" %>
  </div>
- </div>
+ <% end %>
+
 
 <div style="border-style: solid; border-width: 1px;">
 
