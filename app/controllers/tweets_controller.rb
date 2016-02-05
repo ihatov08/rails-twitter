@@ -2,8 +2,9 @@ class TweetsController < ApplicationController
   before_action :authenticate_user!
   def index
     @users = User.all
-    @tweets = @user
+    @tweets = Tweet.page(params[:page])
     @tweet = Tweet.new
+
   end
 
   def new
@@ -33,6 +34,8 @@ class TweetsController < ApplicationController
   end
 
   def show
+    @users = User.all
+    @tweets = Tweet.all
     @tweet = Tweet.find(params[:id])
   end
 

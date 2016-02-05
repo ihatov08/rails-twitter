@@ -1,79 +1,43 @@
 <%= form_for(@tweet) do |f| %>
 
-
 <div class="form-group">
-<%= f.text_area :content %>
-<%= f.text_field :user_id, value: current_user.id %>
- <textarea rows="5" class="form-control" placeholder="（本文は140字以内で投稿）" ></textarea>
- </div>
-
- <div class="text-left"><span class="text-danger">
-   <% if @tweet.errors.any? %>
-    <div class="alert alert-danger">
-      <ul>
-       <% @customer.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-   <% end %>
- </span>
-
+<%= f.text_area :content, class: "form-control", placeholder: "（本文は140字以内で投稿）" %>
+<%= f.hidden_field :user_id, value: current_user.id %>
  <div class="text-right">
  <%= f.submit "投稿", class: "btn btn-primary" %>
  </div>
- <% end %>
 
-
-<div style="border-style: solid; border-width: 1px;">
-
- <div style="border-style: solid; border-width: 1px;">
-  <ul class="media-list">
-   <li class="media">
-    <!-- pull-right にすると、画像が右端に表示される -->
-    <a class="pull-left" href="#">
-      <img class="media-object" src="http://www.sora-kyoto.jp/wp-content/uploads/2014/09/tenisu.jpg" alt="...">
-    </a>
-    <div class="media-body">
-      <h4 class="media-heading">@kashiwagi 2016-01-01 23:59 59</h4>
-      kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk<br>
-      返信 お気に入り
-
-    </div>
-   </li>
-  </ul>
+<% end %>
  </div>
 
- <div style="border-style: solid; border-width: 1px;">
-  <ul class="media-list">
-   <li class="media">
-    <!-- pull-right にすると、画像が右端に表示される -->
-    <a class="pull-left" href="#">
-      <img class="media-object" src="http://www.sora-kyoto.jp/wp-content/uploads/2014/09/tenisu.jpg" alt="...">
-    </a>
-    <div class="media-body">
-      <h4 class="media-heading">@kashiwagi 2016-01-01 23:59 59</h4>
-      kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk<br>
-      返信 お気に入り
+<div class="row">
+  <div class="col-lg-12">
+    <% @tweets.each do |tweet| %>
+      <div class="media">
+        <div class="media-left">
+           <%= image_tag tweet.user.image, class: 'media-object', width: 64 %>
+        </div>
+        <div class="media-body">
+        <%= tweet.user.name %>
+        <%= link_to "#{@time}", tweet %>
+        <% @time = tweet.created_at.strftime('(%Y/%m/%d %H:%M)') %>
+        <p class="text-muted">
+          <%= tweet.content %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-    </div>
-   </li>
-  </ul>
- </div>
+<%= paginate @tweets %>
 
 
 
- </div>
 
-<ul class="pagination pagination-sm">
-  <li class="disabled"><a href="#">«</a></li>
-  <li class="active"><a href="#">1</a></li>
-  <li><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-  <li><a href="#">»</a></li>
-</ul>
+
+
+
 
 
 

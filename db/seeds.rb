@@ -9,6 +9,6 @@
 100.times do |index|
   Tweet.create(
     user_id: rand(3) + 1,
-    content: "#{index}番目のツイートです",
+    content: "#{index}番目のツイートです", :controller => "tweets", :action => "show" %>
     )
 end
