@@ -44,6 +44,16 @@ class TweetsController < ApplicationController
     redirect_to tweets_url
   end
 
+  def reply
+    @tweet = current_user.tweets.build(content: params[:tweet][:content])
+    @tweet.reply_tweet_id = params[:id]
+    if @tweet.save
+      redirect_to tweets_url
+    else
+      render :index
+    end
+  end
+
   private
 
   def tweet_params

@@ -1,24 +1,21 @@
 <div class="row">
   <div class="col-lg-12">
-   <div class="media">
-        <div class="media-left">
-        </div>
-        <div class="media-body">
+   <div style="border-style: solid; border-width: 1px;">
+      <div class="media">
         <div class="media-left">
            <%= image_tag current_user.image, class: 'media-object', width: 64 %>
         </div>
-
-        <p class="text-muted">
-        <%= current_user.id %>
-
-          <%= @tweet.content %>
+        <div class="media-body">
         <%= @tweet.user.name %>投稿日時：<%= @tweet.created_at.strftime('(%Y/%m/%d %H:%M)') %>
-
+        <p class="text-muted">
+          <%= @tweet.content %>
           </p>
         </div>
       </div>
-      </div>
-      </div>
+    </div>
+  </div>
+</div>
+
 
 
 
