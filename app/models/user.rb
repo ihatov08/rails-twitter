@@ -1,5 +1,13 @@
 class User < ActiveRecord::Base
   has_many :tweets
+  has_many :favorites
+  has_many :favorited_tweets, through: :favorites, source: :tweet
+
+  def favoritable_for?(tweet)
+    tweet && tweet.user != self && !favorites.exists?(tweet_id: tweet.id)
+  end
+
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

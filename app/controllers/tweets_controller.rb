@@ -4,7 +4,6 @@ class TweetsController < ApplicationController
     @users = User.all
     @tweets = Tweet.page(params[:page])
     @tweet = Tweet.new
-
   end
 
   def new
@@ -33,10 +32,30 @@ class TweetsController < ApplicationController
 
   end
 
+  def like
+    tweet = Tweet.find(params[:tweet_id])
+    favorite = current_user.favorites.build(tweet_id: tweet.id)
+    favorite.save
+    redirect_to tweets_url
+  end
+
+  def unlike
+    tweet = Tweet.find(params[:tweet_id])
+    favorite = current_user.favorites.find_by(tweet_id: tweet.id)
+    favorite.destroy
+    redirect_to tweets_url
+  end
+
+  def favoriting_users
+    @tweet = Tweet.find(params[:id])
+    @users = @tweet.favoriting_users
+  end
+
+
   def show
     @users = User.all
-    @tweets = Tweet.all
     @tweet = Tweet.find(params[:id])
+    @users = @tweet.favoriting_users
   end
 
   def destroy
@@ -60,7 +79,8 @@ class TweetsController < ApplicationController
     params.require(:tweet).permit(
       :user_id,
       :reply_tweet_id,
-      :content
+      :content,
+      :tweet_id,
       )
   end
 end

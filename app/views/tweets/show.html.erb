@@ -10,11 +10,36 @@
         <p class="text-muted">
           <%= @tweet.content %>
           </p>
+        <div>
+         <% if current_user.favorites.find_by(tweet_id: @tweet.id) %>
+         <%= link_to 'お気に入り！を取り消す', unlike_path(@tweet.id), method: :delete %>
+         <% else %>
+         <%= link_to 'お気に入り！', like_path(@tweet.id), method: :post %>
+         <% end %>
+        </div>
+
+        <div>
+        <small>
+
+        </small>
+        </div>
+
+
         </div>
       </div>
     </div>
   </div>
+
 </div>
+
+
+
+
+
+
+
+
+
 
 
 

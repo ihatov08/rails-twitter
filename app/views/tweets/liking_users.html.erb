@@ -1,0 +1,14 @@
+<ul class='show-tweet'>
+  <%= render @tweet %>
+</ul>
+
+<h2 class="heading">いいねしているユーザー一覧 </h2>
+<ul class='user-list'>
+<li>
+  <%= image_for(user) %>
+  <%= link_to user.name, user %> |
+  <%= user.email %>
+</li>
+
+
+</ul>

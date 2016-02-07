@@ -1,0 +1,4 @@
+<% if current_user && current_user.favoritable_for?(@tweet) %>
+<%= link_to "お気に入り", [:like, @tweet], method: :patch, class: "button" %>
+
+<% end %>

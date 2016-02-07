@@ -1,11 +1,22 @@
 Rails.application.routes.draw do
   root 'tweets#index'
-  resources :tweets do
+  devise_for :users
+  resources :users, only: [:index, :show, :edit, :update] do
     member do
-      post :reply
+      get :favorite_tweets
     end
   end
-  devise_for :users
+  resources :tweets, only: [ :index, :show, :create, :edit, :update, :destroy] do
+    member do
+      get :favoriting_users
+    end
+  end
+
+  post '/favorite/:tweet_id' => 'tweets#like', as: 'like'
+  delete 'unlike/:tweet_id' => 'tweets#unlike', as: 'unlike'
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
