@@ -6,7 +6,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @tweets = @user.tweets
+    # @user = User.find(params[:id])
+    @tweets = @user.tweets.page(params[:page]).per(10)
   end
 
   def new

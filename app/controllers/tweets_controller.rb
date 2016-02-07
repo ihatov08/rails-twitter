@@ -2,7 +2,7 @@ class TweetsController < ApplicationController
   before_action :authenticate_user!
   def index
     @users = User.all
-    @tweets = Tweet.page(params[:page])
+    @tweets = Tweet.page(params[:page]).per(10)
     @tweet = Tweet.new
   end
 
