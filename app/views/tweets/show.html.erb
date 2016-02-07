@@ -3,13 +3,16 @@
    <div style="border-style: solid; border-width: 1px;">
       <div class="media">
         <div class="media-left">
-           <%= image_tag current_user.image, class: 'media-object', width: 64 %>
+           <%= image_tag @tweet.user.image, class: 'media-object', width: 64 %>
         </div>
         <div class="media-body">
         <%= @tweet.user.name %>投稿日時：<%= @tweet.created_at.strftime('(%Y/%m/%d %H:%M)') %>
         <p class="text-muted">
           <%= @tweet.content %>
           </p>
+
+
+
         <div>
          <% if current_user.favorites.find_by(tweet_id: @tweet.id) %>
          <%= link_to 'お気に入り！を取り消す', unlike_path(@tweet.id), method: :delete %>
@@ -19,9 +22,7 @@
         </div>
 
         <div>
-        <small>
-
-        </small>
+          <%= render 'reply' %>
         </div>
 
 

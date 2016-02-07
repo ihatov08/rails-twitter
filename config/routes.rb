@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :tweets, only: [ :index, :show, :create, :edit, :update, :destroy] do
     member do
       get :favoriting_users
+      post :reply
     end
   end
 

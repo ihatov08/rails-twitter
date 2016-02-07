@@ -1,0 +1,9 @@
+  <div class="reply">
+    <%= form_for Tweet.new, url:{ controller: :tweets, action: :reply, id: @tweet.id } do |f| %>
+      <%= f.text_field :reply_tweet_id, value: @tweet.id %>
+      <%= f.text_field :user_id, value: current_user.id %>
+      <%= text_area_tag 'tweet[content]', "@#{@tweet.user.name}", placeholder: 'reply' %>
+
+
+      <%= f.submit 'tweet', class: "btn btn-primary" %>
+    <% end %>
