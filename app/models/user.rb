@@ -20,6 +20,11 @@ class User < ActiveRecord::Base
 
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
+    validates :name,
+    presence: { message: "ユーザーネームを入力して下さい"},
+    uniqueness: { message: "すでにそのユーザーネームは使われています。"},
+    length: {minimum: 8, too_short: "ユーザーネームは８文字以上で入力して下さい。"}
+
     validates :email,
     presence: { message: "正しいメールアドレスの形式で入力してください。"},
     format: { with: VALID_EMAIL_REGEX,:message => '正しいメールアドレスの形式で入力してください。' },
@@ -31,6 +36,15 @@ class User < ActiveRecord::Base
 
     validates :password_confirmation, presence: { message: "パスワード（確認）を入力してください"}
 
+    validates :profile,
+    presence: { message: "プロフィールを入力してください"}
 
-end
+    def set_image(file)
+      if !file.nil?
+        file_name = file.original_filename
+        File.open("public/user_images/#{file_name})", 'wb'){|f| f.write(file.read)}
+        self.image = file_name
+      end
+    end
+  end
 
