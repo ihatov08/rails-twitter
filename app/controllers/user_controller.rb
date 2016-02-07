@@ -60,3 +60,5 @@ class UsersController < ApplicationController
         redirect_to root_path, alert: '許可されていないページです'
       end
 end
+
+end
